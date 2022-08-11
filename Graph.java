@@ -47,12 +47,40 @@ class Graph{
         degree++;
       }
     }
-   /*for(int i = 0; i < countNodes; i++){
-      if(this.adjMatrix[i][node] != 0){
-        degree++;
-      }
-    }*/
     return degree;
   }
 
+  public int highestDegree(){
+    int count = 0;
+    for(int i = 0; i < this.adjMatrix.length; i++){ 
+      int aux = degree(i);
+      if(aux > count){
+        count = aux;
+      }
+    }
+    return count;
+  }
+
+  public int lowestDegree(){
+    int count = 0;
+    for(int i = 0; i < this.adjMatrix.length; i++){ 
+      int aux = degree(i);
+      if(aux <= count){
+        count = aux;
+      }
+    }
+      return count;
+    }
+  
+  public Graph complement(){
+    Graph g2 =  new Graph(this.adjMatrix.length);
+    for(int i = 0; i < this.adjMatrix.length; i++){
+      for(int j = 0; j < this.adjMatrix[i].length; j++){
+        if(i != j && this.adjMatrix[i][j] == 0){
+          g2.addEdge(i, j, 1);
+        }
+      }
+    }
+    return g2;
+  }
 }
